@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interview</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+
+</head>
+
+<body>
+
+    <style>
+        .mul-select {
+            width: 50%;
+        }
+    </style>
+
+    <div class="bodyDiv">
+        <div class="Heading">
+            <h1>Schedule Interview</h1>
+        </div>
+        
+        <hr style="background-color: black; width: 100%;">
+
+        <div class="MainForm">
+
+            <form action="/sign_up" method="post">
+
+                <div class="formDiv">
+        
+                    <div style="width: 350px;">
+                        <b> Participants : </b><select id="name" name="name" class="mul-select" multiple="true">
+                            <% for(var i = 0 ; i < allParticipants.length ; i++){%>
+                                <option value="<%= allParticipants[i].name %>"> <%= allParticipants[i].name %></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <br>
+
+                    <%
+                        var dtToday = new Date();
+        
+                        var month = dtToday.getMonth() + 1;
+                        var day = dtToday.getDate();
+                        var year = dtToday.getFullYear();
+                        if(month < 10)
+                            month = '0' + month.toString();
+                        if(day < 10)
+                            day = '0' + day.toString();
+                        
+                        var maxDate = year + '-' + month + '-' + day;
+                        
+                    %>
+
+                    <div> <b> Date : </b> <input type="date" id="appt" name="interview_date" min="<%= maxDate %>" required> </div>
+                    <br>
+                    
+                    <div> <b> Start Time : </b> <input type="time" id="appt" name="start_time" required> </div>
+                    <br>
+                    
+                    <div> <b> End Time : </b><input type="time" id="appt" name="end_time" required></div>
+                    <br>
+                    
+                    <div>
+                        <input type="submit" id="submitDetails" name="submitDetails" value="Submit" class="submitButton"/>
+                        
+                        <a href="/">
+                            <input type="button" value="Home" class="goBack" >
+                        </a>
+                    </div>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".mul-select").select2({
+                placeholder: "select participants", //placeholder
+                tags: true,
+                tokenSeparators: ['/', ',', ';', " "]
+            });
+        })
+    </script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .formDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            /* background-color: #ed1c40; */
+            /* width: 50vw; */
+            padding: 5vh;
+        }
+
+        .bodyDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .Heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 12vh;
+        }
+
+        .submitButton,
+        .goBack {
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .submitButton:hover {
+            background-color: green;
+            color: white;
+        }
+
+        .goBack:hover {
+            background-color: #ed1c40;
+            color: white;
+        }
+
+        .MainForm {
+            /* background-color: #10aaf0; */
+            height: 72vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10vh;
+        }
+
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Interview</title>
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <style>
+        .mul-select {
+            width: 50%;
+        }
+    </style>
+
+    <div class="bodyDiv">
+        <div class="Heading">
+            <h1>Update Interview</h1>
+        </div>
+        
+        <hr style="background-color: black; width: 100%;">
+        
+        <div class="MainForm">
+
+            <form action="/editInterview" method="post">
+
+                <input style="display: none;" value="<%=interviewData[0]._id%>" name="id">
+                <div class="formDiv">
+        
+                    <div style="width: 22%;">
+                        <b> Participants : </b><select id="name" name="name" class="mul-select" multiple="true" value = "<%=interviewData[0].participants%>">
+                            <%=console.log(interviewData[0].participants)%>
+
+                            <% for(var i = 0 ; i < allParticipants.length ; i++){%>
+                                <option value="<%= allParticipants[i].name %>" <%=(interviewData[0].participants.includes(allParticipants[i].name)?'selected':'' )%> > <%= allParticipants[i].name %></option>
+                            <%}%>
+
+                        </select>
+                    </div>
+                    <br>
+
+                    <%
+                        var dtToday = new Date();
+        
+                        var month = dtToday.getMonth() + 1;
+                        var day = dtToday.getDate();
+                        var year = dtToday.getFullYear();
+                        if(month < 10)
+                            month = '0' + month.toString();
+                        if(day < 10)
+                            day = '0' + day.toString();
+                        
+                        var maxDate = year + '-' + month + '-' + day;
+                        
+                    %>
+
+                    <div> <b> Date : </b> <input type="date" id="appt" name="interview_date" value="<%=interviewData[0].interview_date%>"  min="<%= maxDate %>" required> </div>
+                    <br>
+                    
+                    <div> <b> Start Time : </b> <input type="time" id="appt" name="start_time" value="<%=interviewData[0].startTime%>" required> </div>
+                    <br>
+                    
+                    <div> <b> End Time : </b><input type="time" id="appt" name="end_time" value="<%=interviewData[0].endTime%>" required></div>
+                    <br>
+                    
+                    <div>
+                        <input type="submit" id="submitDetails" name="submitDetails" value="Submit" class="submitButton"/>
+                        <input type="button" value="Go back!" class="goBack" onclick="history.back()">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <style>
+        .formDiv {
+            margin-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .bodyDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .Heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submitButton,
+        .goBack {
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+        }
+
+        .submitButton:hover {
+            background-color: green;
+            color: white;
+        }
+
+        .goBack:hover {
+            background-color: #ed1c40;
+            color: white;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $(".mul-select").select2({
+                placeholder: "select participants", //placeholder
+                tags: true,
+                tokenSeparators: ['/', ',', ';', " "]
+            });
+        })
+    </script>
+</body>
+
+</html>

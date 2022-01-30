@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interview</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+
+</head>
+
+<body>
+
+    <div class="bodyDiv">
+        <div class="Heading">
+            <h1>Create User</h1>
+        </div>
+        
+        <hr style="background-color: black; width: 100%;">
+
+        <div class="MainForm">
+
+            <form action="/newUserCreated" method="post">
+
+                <div class="formDiv">
+        
+                    <div style="width: 350px;">
+                        <b> Participant Name : </b>
+                        <input type="text" id="appt" name="participant_name" required>
+                    </div>
+                    <br>
+                    
+                    <div>
+                        <b style="text-decoration: underline;">Busy Slots </b> 
+                    </div>
+
+                    <br>
+
+                    <div id="allBusySlots">
+                        <div class="allDivs">
+                            <div> <b> Date : </b> <input type="date" id="appt" name="interview_date" required> </div>
+                            <br>
+
+                            <div> <b> Start Time : </b> <input type="time" id="appt" name="busy_slot_startTime" required> </div>
+                            <br>
+                            
+                            <div> <b> End Time: </b> <input type="time" id="appt" name="busy_slot_endTime" required> </div>
+                            <br> 
+                        </div>      
+                    </div>
+
+                    <div> <button class="addAnotherBusySlot submitButton" style="padding: 6px; font-size: 15px;">Add Another</button> </div>
+                    <br>
+
+                    <script>
+                        document.querySelector(".addAnotherBusySlot").addEventListener('click' , () => {
+
+                            var newDiv = document.createElement('div')
+                            newDiv.classList.add("allDivs")
+                            var date = document.createElement('div')
+                            date.innerHTML = "<b> Date : </b> <input type='date' id='appt' name='interview_date' required>";
+
+                            var startTime = document.createElement('div')
+                            startTime.innerHTML = "<b> Start Time : </b> <input type='time' id='appt' name='busy_slot_startTime' required>";
+
+                            var endTime = document.createElement('div')
+                            endTime.innerHTML = "<b> End Time : </b> <input type='time' id='appt' name='busy_slot_endTime' required>";
+                            
+                            var buttonDiv = document.createElement('div')
+                            buttonDiv.innerHTML = "<button class = 'removeButtons goBack' style='padding: 6px; font-size: 15px;'>Remove</button>"
+
+                            newDiv.appendChild(date)
+                            newDiv.appendChild(document.createElement('br'))
+                            
+                            newDiv.appendChild(startTime)
+                            newDiv.appendChild(document.createElement('br'))
+                            
+                            newDiv.appendChild(endTime)
+                            newDiv.appendChild(document.createElement('br'))
+
+                            newDiv.appendChild(buttonDiv)
+                            newDiv.appendChild(document.createElement('br'))
+                            
+                            document.querySelector("#allBusySlots").append(newDiv)
+
+                            $(allBusySlots).on("click",".removeButtons", function(e){ 
+                                e.preventDefault(); 
+                                $(this).parent('div').parent('div').remove(); 
+                            })
+                        })
+
+                        
+                    </script>
+
+                    <div> <b> Email : </b><input type="email" id="appt" name="email_user" required></div>
+                    <br>
+                    
+                    <div>
+                        <input type="submit" id="submitDetails" name="submitDetails" value="Submit" class="submitButton"/>
+                        
+                        <a href="/">
+                            <input type="button" value="Home" class="goBack" >
+                        </a>
+                    </div>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".mul-select").select2({
+                placeholder: "select participants", //placeholder
+                tags: true,
+                tokenSeparators: ['/', ',', ';', " "]
+            });
+        })
+    </script>
+
+    <style>
+        .mul-select {
+            width: 50%;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .allDivs{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: solid black 1px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        .formDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            /* background-color: #ed1c40; */
+            /* width: 50vw; */
+            padding: 5vh;
+        }
+
+        .bodyDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .Heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 12vh;
+        }
+
+        .submitButton,
+        .goBack {
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .submitButton:hover {
+            background-color: green;
+            color: white;
+        }
+
+        .goBack:hover {
+            background-color: #ed1c40;
+            color: white;
+        }
+
+        .MainForm {
+            /* background-color: #10aaf0; */
+            height: 72vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* margin-top: 10vh; */
+        }
+
+    </style>
+</body>
+
+</html>

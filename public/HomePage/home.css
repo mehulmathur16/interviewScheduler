@@ -1,0 +1,93 @@
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+}
+
+.navbar {
+  margin: 2vh;
+  height: 14vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.midDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 82vh;
+}
+
+.midDiv {
+  /* Background pattern from Toptal Subtle Patterns */
+  background-image: url("https://interviewschedule.com/static/images/clock-photo-6.jpg");
+  height: 82vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.mainHeading {
+  margin-bottom: 10px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  font-size: 34px;
+}
+
+.subHeading {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  font-size: 10px;
+  font-size: xx-small;
+  margin-bottom: 12vh;
+}
+
+#scheduleButton,
+#upcomingButton {
+  padding: 3vh;
+  cursor: pointer;
+  margin: 2vh;
+  border-radius: 2vh;
+  background-color: #10aaf0;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 14px;
+}
+
+#scheduleButton:hover {
+  background-color: white;
+  color: #10aaf0;
+}
+
+#upcomingButton:hover {
+  background-color: white;
+  color: #10aaf0;
+}
+
+.navButtons {
+  padding: 2vh;
+  cursor: pointer;
+  margin: 2vh;
+  border-radius: 2vh;
+  background-color: #10aaf0;
+  color: white;
+  font-size: 2.5vh;
+  font-weight: 14px;
+  margin-right: 10vh;
+}
+
+.divNavButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

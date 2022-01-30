@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Scheduler</title>
+    <link rel = "stylesheet" href="home.css">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+</head>
+<body>
+
+    <div>
+
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://interviewschedule.com/static/images/interview-schedule-logo-light-small.png">
+            </div>
+
+            <div class="divNavButtons">
+                
+                <div>
+                    <form action="/createUser" method="get">
+                        <input type="submit" class="navButtons" value="Create User">
+                    </form>
+                </div>
+
+                <div>
+                    <form action="/allUsers" method="get">
+                        <input type="submit" class="navButtons" value="All Users">
+                    </form>
+                </div>
+
+                <div>
+                    <button class="navButtons">Hi, Admin</button>
+                </div>
+                
+            </div>
+
+            
+        </div>
+
+        <div class="midDiv">
+
+                <div class="mainHeading">
+                    <h1> Interview Scheduling , Simplified. </h1>
+                </div>
+
+                <div class="subHeading">
+                    <h1> Go from a scheduling request to the best schedule in seconds. </h1>
+                </div>
+
+                <div style="display: flex; flex-direction: row;">
+
+                    <div style="margin-right: 20px;">
+                        <form action="/scheduleInterview" method="get">
+                            <button id="scheduleButton">Schedule an Interview</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <form action="/upcomingInterviews" method="get">
+                            <button id="upcomingButton">Upcoming Interviews</button>
+                        </form>
+                    </div>
+                </div>  
+        </div>
+    </div>
+
+    
+
+    <script src="home.js"></script>
+</body>
+</html>

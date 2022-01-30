@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Interviews</title>
+    <link rel="shortcut icon" href="/images/icon.png" type="image/png">
+</head>
+<body>
+
+    <div class="bodyDiv">
+
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://interviewschedule.com/static/images/interview-schedule-logo-light-small.png">
+            </div>
+
+            <div class="divNavButtons">
+                
+                <a href="/">
+                    <input type="button" value="Home" class="navButtons">
+                </a>
+                
+            </div>
+
+            
+        </div>
+
+        
+        <hr style="background-color: black; width: 100%;">
+
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+            
+            <div>
+                <button id="searchByName" class="goBack">Search By Name</button>
+            </div>
+
+            <div>
+                <button id="searchByDate" class="goBack" style="margin-left: 20px;">Search By Date</button>
+            </div>
+
+            <div style="display: flex; flex-direction: row; margin-left: 20px;">
+                <form action="/sortByTime" method="get">
+                    <input type="submit" value="Sort By Time" class="goBack" >
+                </form>
+
+                <form action="/upcomingInterviews" method="get">
+                    <input type="submit" value="Reset Filter" class="goBack" style="margin-left: 10px;">
+                </form>
+            </div>
+            
+        </div>
+
+        <div style="margin-right: 40px; display: none; align-items: center; justify-content: center; margin: 5vh;" id="searchByNameDiv">
+            <form action="/searchParticipant" method="post">
+                <input type="text" name="textData" placeholder="Enter Participant Name" style="border-radius: 10px; padding: 10px; border-color: black; border-width: 1px;">
+                <input type="submit" value="Search" class="goBack" id="searchButton">
+            </form>
+        </div>
+
+        <script>
+            document.querySelector("#searchByName").addEventListener('click' , () => {
+                var x = document.querySelector("#searchByNameDiv")
+                x.style.display = x.style.display == "flex" ? "none" : "flex"
+            })
+        </script>
+
+        <div style="margin-right: 40px; display: none; align-items: center; justify-content: center; margin: 5vh;" id="searchByDateDiv">
+            <form action="/searchDate" method="post">
+                <input type="date" name="interview_date" placeholder="dd-mm-yyyy" style="border-radius: 10px; padding: 10px; border-color: black; border-width: 1px;">
+                <input type="submit" value="Search" class="goBack" id="searchButton">
+            </form>
+        </div>
+
+        <script>
+            document.querySelector("#searchByDate").addEventListener('click' , () => {
+                var x = document.querySelector("#searchByDateDiv")
+                x.style.display = x.style.display == "flex" ? "none" : "flex"
+            })
+        </script>
+        
+        <div class="mainDiv">
+
+            <% if(name.length === 0) {%>
+                <div style="display: flex; align-items: center; justify-content: center; margin: 16vh; font-size: medium;">
+                    <h2 style="color: black;">No meetings found!</h2>
+                </div>
+            <% } else{ %>
+                <% for (var i=0; i < name.length ; i++ ) {%>
+                    <div class = "wrapper" data-id=<%= name[i]._id %> >
+                        <h2 class="upper">Interview - <%=i + 1%></h2>
+                        <a class="meetup">Participants : </a>
+                        <ul> 
+                            <% for (var j = 0; j < name[i].participants.length ; j++) { %>
+                                <li> <%= name[i].participants[j] %></li>
+                            <% } %>
+                        </ul>
+        
+                        <p class="details">
+
+                                <% var d = name[i].interview_date.split('-') %>
+                                <% var newDate = d[2] + " / " + d[1] + " / " + d[0] %>
+                            
+                                <span class="row">
+                                <i class="material-icons md-36 icon">Date : </i>
+                                <span class="row-item">
+                                <time><%= newDate %></time>
+                                </span>
+                                </span> 
+                            
+                                <span class="row">
+                                <i class="material-icons md-36 icon">Start Time : </i>
+                                <span class="row-item">
+                                <time><%= name[i].startTime %></time>
+                                </span>
+                                </span>
+        
+                                <span class="row">
+                                    <i class="material-icons md-36 icon">End Time : </i>
+                                    <span class="row-item">
+                                    <time><%= name[i].endTime %></time>
+                                    </span>
+                                </span>
+                            
+        
+                                <span class="row">
+                                    <span class="row-item">
+                                        <a href="/editInterview/<%= name[i]._id %>"><button style="cursor: pointer; border-radius: 5px; background: white; margin: 10px; padding: 08px; border: none;">Edit</button></a>
+                                    </span>
+
+                                    <span class="row-item">
+                                        <a href="/deleteInterview/<%= name[i]._id %>"><button style="cursor: pointer; border-radius: 5px; background: white; margin: 10px; padding: 08px; border: none;">Delete</button></a>
+                                    </span>
+                                </span>
+                        </p>
+                    </div>
+                <% } %>
+              <% } %>
+          </div>
+      
+
+    </div>
+
+    
+    <style>
+        body {
+            color: white;
+            font-family: "Lato", sans-serif;
+            white-space: nowrap;
+        }
+
+        .navbar{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navButtons {
+            padding: 2vh;
+            cursor: pointer;
+            margin: 2vh;
+            border-radius: 2vh;
+            border: none;
+            background-color: #10aaf0;
+            color: white;
+            font-size: 2.5vh;
+            font-weight: 14px;
+            margin-right: 10vh;
+        }
+
+        .divNavButtons{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            font-size: larger;
+        }
+
+        .bodyDiv{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .Heading{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+
+        .goBack {
+            border-radius: 10px;
+            border-color: black ;
+            border-width: 1px;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: white;
+        }
+
+        .goBack:hover {
+            background-color: #ed1c40;
+            color: white;
+            border-color: transparent;
+        }
+
+        .mainDiv{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .wrapper {
+            background: #ed1c40;
+            /* background-color: rgba(255, 255, 255, 0.2); */
+            display: flex;
+            flex-direction: column;
+            padding: 1.5em;
+            width: 200px;
+            height: 370px;
+            border-radius: 10px;
+            margin: 40px;
+        }
+
+        .upper {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 2;
+            text-transform: uppercase;
+        }
+
+        .meetup {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .group {
+            flex-grow: 1;
+        }
+
+        .icon {
+            display: inline-block;
+            position: relative;
+            top: -0.1em;
+            vertical-align: middle;
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+
+        .row-item {
+            padding-left: 10px;
+        }
+
+    </style>
+    
+</body>
+</html>
